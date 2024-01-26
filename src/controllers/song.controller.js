@@ -20,7 +20,6 @@ const getSongByArtist=catchAsync(async (req,res)=>{
     const result = await SongService.querySongsByArtist()
     res.send(result)
 })
-//List Songs Bt album
 const getSongByGenre=catchAsync(async (req,res)=>{
     const result = await SongService.querySongsByGenre()
     res.send(result)
