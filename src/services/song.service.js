@@ -86,7 +86,6 @@ const querySongsByGenre = async () => {
 
     return genresAndSongs;
   } catch (error) {
-    // Throw an ApiError if there's an error fetching songs by genre
     throw new ApiError(400, 'Error fetching songs by genre', error);
   }
 };
