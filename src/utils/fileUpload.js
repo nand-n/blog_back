@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Multer configuration for handling image uploads
+//Used for uploading files
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = path.join(__dirname, '../uploads');
