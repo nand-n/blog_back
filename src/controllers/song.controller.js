@@ -3,7 +3,6 @@ const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { SongService } = require('../services');
 
-// Create a song
 const createSong = catchAsync(async (req, res) => {
     const song = await SongService.createSong(req.body);
     res.status(httpStatus.CREATED).send(song);
