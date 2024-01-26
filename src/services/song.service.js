@@ -75,12 +75,11 @@ const querySongsByGenre = async () => {
       {
         $group: {
           _id: '$genre',
-          songs: { $push: '$$ROOT' }, // Push the entire song document to the songs array
+          songs: { $push: '$$ROOT' }, 
         },
       },
     ]);
 
-    // Map the result to create an array of objects with genreName and songs
     const genresAndSongs = result.map(({ _id, songs }) => ({
       genreName: _id,
       songs,
