@@ -70,7 +70,6 @@ const querySongsByArtist = async () => {
 
 const querySongsByGenre = async () => {
   try {
-    // Use the `aggregate` method to group songs by genre
     const result = await Song.aggregate([
       {
         $group: {
