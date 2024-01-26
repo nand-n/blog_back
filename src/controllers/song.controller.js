@@ -24,7 +24,6 @@ const getSongByGenre=catchAsync(async (req,res)=>{
     const result = await SongService.querySongsByGenre()
     res.send(result)
 })
-//Fetch Single Song
 const getSong = catchAsync(async (req, res) => {
     const result = await SongService.getSongById(req.params.id);
     if (!result) {
