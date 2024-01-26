@@ -34,7 +34,6 @@ const getSong = catchAsync(async (req, res) => {
         data: result
     });
 });
-//Get Statistics
 const getStatistics =catchAsync(async (req, res) => {
     const result = await SongService.getStatistics();
     res.status(200).json({
@@ -43,7 +42,6 @@ const getStatistics =catchAsync(async (req, res) => {
     });
 });
 
-//Update  a song
 const updateSongById = catchAsync(async (req, res) => {
     const result = await SongService.updateSongById(req.params.id, req.body);
     res.status(200).send(result);
