@@ -9,7 +9,6 @@ const createSong = catchAsync(async (req, res) => {
     res.status(httpStatus.CREATED).send(song);
 });
 
-// List all songs
 const getSongs = catchAsync(async (req, res) => {
     const result = await SongService.querySongs();
     res.send(result);
