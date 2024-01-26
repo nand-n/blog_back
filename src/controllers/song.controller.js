@@ -47,7 +47,6 @@ const updateSongById = catchAsync(async (req, res) => {
     res.status(200).send(result);
 
 });
-//Delete Song By ID
 const deleteSongById = catchAsync(async (req, res) => {
     const result = await SongService.deleteSongById(req.params.id);
     res.status(200).send(result);
