@@ -1,23 +1,26 @@
-const mongoose = require('mongoose');
 const app = require('./app');
+const connectToMongoDB = require('./utils/mongoose');
 const logger = require('./config/logger');
-
 let server;
 
-mongoose.connection.once('open', () => {
-  logger.info('Connected to MongoDB through Mongoose');
- server = app.listen(process.env.PORT, () => {
-    logger.info(`Listening to port http://localhost:${process.env.PORT}`);
-  });
-});
+const startServer = async () => {
+  try {
+    await connectToMongoDB(); // Use the utility function to connect to MongoDB
+    server = app.listen(process.env.PORT, () => {
+      logger.info(`Server is running on http://localhost:${process.env.PORT}`);
+    });
 
-mongoose.connection.on('error', (error) => {
-  logger.error(`MongoDB connection error: ${error}`);
-});
+    server.on('error', (error) => {
+      logger.error(`Server error: ${error}`);
+      process.exit(1); // Exit the process in case of server error
+    });
+  } catch (error) {
+    logger.error(`Server startup error: ${error}`);
+    process.exit(1); // Exit the process in case of MongoDB connection error
+  }
+};
 
-// Initialize the Mongoose connection
-mongoose.connect(process.env.DATABASE_URL);
-
+startServer();
 
 const exitHandler = () => {
   if (server) {
