@@ -6,6 +6,13 @@ const connectToMongoDB = require('./config/mongoDb');
 const startServer = async () => {
   try {
     await connectToMongoDB(); // Use the utility function to connect to MongoDB
+    // Connect to Neo4j
+    connectNeo4j()
+    .then(session => {
+      // Do something with the Neo4j session
+    })
+    .catch(error => console.error('Neo4j connection error:', error));
+
     const server = app.listen(process.env.PORT, () => {
       logger.info(`Server is running on http://localhost:${process.env.PORT}`);
     });
