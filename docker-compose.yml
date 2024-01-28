@@ -8,6 +8,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: blog
     ports:
       - "27017:27017"
     volumes:
@@ -32,19 +33,31 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-
-  blog_backend_app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: blog_node
+  neo4j:
+    image: neo4j
+    container_name: neo4j
     restart: always
+    environment:
+      NEO4J_AUTH: neo4j/neo4j
     ports:
-      - "3000:3000"
-    depends_on:
-      - mongo
+      - "7474:7474"
+      - "7687:7687"
     volumes:
-      - ./:/app
+      - neo4jdata:/data
+
+  # blog_backend_app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: blog_node
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - mongo
+  #   volumes:
+  #     - ./:/app
 
 volumes:
   blog:
+  neo4jdata:
