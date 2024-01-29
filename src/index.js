@@ -3,7 +3,7 @@ const app = require('./app');
 const logger = require('./config/logger');
 const connectToMongoDB = require('./config/mongoDb');
 const connectNeo4j = require('./config/neon4j');
-const redisClient = require('./config/redis');
+const redisConfig = require("./config/redis");
 const redis = require('redis');
 
 
@@ -18,7 +18,7 @@ const startServer = async () => {
     // .catch(error => console.error('Neo4j connection error:', error));
     
 
-     await redisClient();
+    redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
       
 
     const server = app.listen(process.env.PORT, () => {

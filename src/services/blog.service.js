@@ -1,23 +1,22 @@
+const { getClient } = require("../config/redis");
 const { Blog } = require("../models");
 
 const getAllBlogs = async () => {
     try {
       const blogs = await Blog.find();
+     
       return blogs;
     } catch (error) {
-      throw new Error('Internal Server Error');
+      throw new Error(error);
     }
   };
   
   const getBlogById = async (id) => {
     try {
       const blog = await Blog.findById(id);
-      if (!blog) {
-        throw new Error('Blog not found');
-      }
       return blog;
     } catch (error) {
-      throw new Error('Internal Server Error');
+      throw new Error(error);
     }
   };
   
@@ -27,7 +26,7 @@ const getAllBlogs = async () => {
       await newBlog.save();
       return newBlog;
     } catch (error) {
-      throw new Error('Internal Server Error');
+      throw new Error(error);
     }
   };
   
@@ -38,16 +37,13 @@ const getAllBlogs = async () => {
       });
       return updatedBlog;
     } catch (error) {
-      throw new Error('Blog not found');
+      throw new Error(error);
     }
   };
   
   const deleteBlog = async (id) => {
     try {
       const deletedBlog = await Blog.findByIdAndDelete(id);
-      if (!deletedBlog) {
-        throw new Error('Blog not found');
-      }
       return deletedBlog;
     } catch (error) {
       throw new Error(error);
