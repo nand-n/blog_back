@@ -9,7 +9,7 @@ const redis = require('redis');
 
 const startServer = async () => {
   try {
-    await connectToMongoDB(); // Use the utility function to connect to MongoDB
+    await connectToMongoDB();
     // Connect to Neo4j
     // connectNeo4j()
     // .then(session => {
