@@ -36,24 +36,21 @@ const getAllBlogs = async () => {
       const updatedBlog = await Blog.findByIdAndUpdate(id, updatedData, {
         new: true,
       });
-      if (!updatedBlog) {
-        throw new Error('Blog not found');
-      }
       return updatedBlog;
     } catch (error) {
-      throw new Error('Internal Server Error');
+      throw new Error('Blog not found');
     }
   };
   
   const deleteBlog = async (id) => {
     try {
-      const deletedBlog = await Blog.findByIdAndRemove(id);
+      const deletedBlog = await Blog.findByIdAndDelete(id);
       if (!deletedBlog) {
         throw new Error('Blog not found');
       }
       return deletedBlog;
     } catch (error) {
-      throw new Error('Internal Server Error');
+      throw new Error(error);
     }
   };
   
