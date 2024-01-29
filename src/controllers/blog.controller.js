@@ -5,11 +5,8 @@ const upload = require("../utils/fileUpload");
 
 const getAllBlogs =  catchAsync(async (req, res) => {
       const blogs = await BlogService.getAllBlogs();
-    
       res.json(blogs);
-     
 })
-  
   const getBlogById = async (req, res) => {
     try {
       const blog = await BlogService.getBlogById(req.params.id);
