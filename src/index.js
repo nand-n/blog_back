@@ -13,11 +13,10 @@ const startServer = async () => {
     // Connect to Neo4j
     // connectNeo4j()
     // .then(session => {
-    //   // Do something with the Neo4j session
+    //   console.error('Neo4j connection error:', error)
     // })
     // .catch(error => console.error('Neo4j connection error:', error));
     
-
     redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
       
 

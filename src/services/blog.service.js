@@ -1,10 +1,8 @@
-const { getClient } = require("../config/redis");
 const { Blog } = require("../models");
 
 const getAllBlogs = async () => {
     try {
       const blogs = await Blog.find();
-     
       return blogs;
     } catch (error) {
       throw new Error(error);
