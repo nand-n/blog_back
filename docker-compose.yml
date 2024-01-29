@@ -37,9 +37,7 @@ services:
     container_name: neo4j
     restart: always
     environment:
-      NEO4J_URI: bolt://localhost:7687
-      NEO4J_USER: neo4j
-      NEO4J_PASSWORD: neo4j
+      NEO4J_AUTH: neo4j/streams
     ports:
       - "7474:7474"
       - "7687:7687"
@@ -58,6 +56,12 @@ services:
       - mongo
     volumes:
       - ./:/app
+  redis-service:
+    image: redis:latest
+    container_name: redis-service
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   blog:

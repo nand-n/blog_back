@@ -3,16 +3,27 @@ const app = require('./app');
 const logger = require('./config/logger');
 const connectToMongoDB = require('./config/mongoDb');
 const connectNeo4j = require('./config/neon4j');
+const redisClient = require('./config/redis');
+const redis = require('redis');
+
 
 const startServer = async () => {
   try {
     await connectToMongoDB(); // Use the utility function to connect to MongoDB
     // Connect to Neo4j
-    connectNeo4j()
-    .then(session => {
-      // Do something with the Neo4j session
+    // connectNeo4j()
+    // .then(session => {
+    //   // Do something with the Neo4j session
+    // })
+    // .catch(error => console.error('Neo4j connection error:', error));
+    
+    redisClient()
+    .then(() => {
+      console.log("Redis connection established");
     })
-    .catch(error => console.error('Neo4j connection error:', error));
+    .catch(error => {
+      console.error("Error establishing Redis connection:", error);
+    });
 
     const server = app.listen(process.env.PORT, () => {
       logger.info(`Server is running on http://localhost:${process.env.PORT}`);
@@ -47,3 +58,4 @@ process.on('SIGTERM', () => {
   logger.info('SIGTERM received');
   exitHandler();
 });
+

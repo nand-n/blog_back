@@ -1,16 +1,16 @@
 const redisClient = require("../config/redis");
 const { BlogService } = require("../services");
+const catchAsync = require("../utils/catchAsync");
 const upload = require("../utils/fileUpload");
 
-const getAllBlogs = async (req, res) => {
-    try {
+const getAllBlogs =  catchAsync(async (req, res) => {
       const blogs = await BlogService.getAllBlogs();
-      redisClient.setEx(req.originalUrl, 3600, JSON.stringify(blogs));
+      if(redisClient.status = 'connect'){
+         await redisClient.client.setEx(req.originalUrl, 3600, blogs);
       res.json(blogs);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+      }
+     
+})
   
   const getBlogById = async (req, res) => {
     try {
@@ -66,7 +66,7 @@ const getAllBlogs = async (req, res) => {
   module.exports = {
     getAllBlogs,
     getBlogById,
-    createBlog: [upload.single('image'), createBlog],
-    updateBlog: [upload.single('image'), updateBlog],
+    createBlog,
+    updateBlog,
     deleteBlog,
   };
