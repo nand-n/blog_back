@@ -1,57 +1,57 @@
-const { Blog } = require("../models");
+const { Performance } = require("../models");
 
-const getAllBlogs = async () => {
+const getAllPerformance = async () => {
     try {
-      const blogs = await Blog.find();
-      return blogs;
+      const Performances = await Performance.find();
+      return Performances;
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const getBlogById = async (id) => {
+  const getPerformanceById = async (id) => {
     try {
-      const blog = await Blog.findById(id);
-      return blog;
+      const Performance = await Performance.findById(id);
+      return Performance;
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const createBlog = async (blogData) => {
+  const createPerformance = async (PerformanceData) => {
     try {
-      const newBlog = new Blog(blogData);
-      await newBlog.save();
-      return newBlog;
+      const newPerformance = new Performance(PerformanceData);
+      await newPerformance.save();
+      return newPerformance;
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const updateBlog = async (id, updatedData) => {
+  const updatePerformance = async (id, updatedData) => {
     try {
-      const updatedBlog = await Blog.findByIdAndUpdate(id, updatedData, {
+      const updatedPerformance = await Performance.findByIdAndUpdate(id, updatedData, {
         new: true,
       });
-      return updatedBlog;
+      return updatedPerformance;
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const deleteBlog = async (id) => {
+  const deletePerformance = async (id) => {
     try {
-      const deletedBlog = await Blog.findByIdAndDelete(id);
-      return deletedBlog;
+      const deletedPerformance = await Performance.findByIdAndDelete(id);
+      return deletedPerformance;
     } catch (error) {
       throw new Error(error);
     }
   };
   
   module.exports = {
-    getAllBlogs,
-    getBlogById,
-    createBlog,
-    updateBlog,
-    deleteBlog,
+    getAllPerformance,
+    getPerformanceById,
+    createPerformance,
+    updatePerformance,
+    deletePerformance,
   };
