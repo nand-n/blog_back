@@ -8,7 +8,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_DATABASE: blog
     ports:
       - "27017:27017"
     volumes:
@@ -47,18 +46,18 @@ services:
     volumes:
       - neo4jdata:/data
 
-  # blog_backend_app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: blog_node
-  #   restart: always
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - mongo
-  #   volumes:
-  #     - ./:/app
+  blog_backend_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog_node
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/app
 
 volumes:
   blog:
