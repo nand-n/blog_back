@@ -10,6 +10,6 @@ const todoSchema = new mongoose.Schema({
   createdDate: String,
 });
 
-const Todo = mongoose.model('Todo', todoSchema);
+const Note = mongoose.model('Note', todoSchema);
 
-module.exports = Todo;
+module.exports = Note;

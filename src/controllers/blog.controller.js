@@ -5,7 +5,7 @@ const upload = require("../utils/fileUpload");
 
 const getAllBlogs =  catchAsync(async (req, res) => {
       const blogs = await BlogService.getAllBlogs();
-      const client = getClient();
+      const client = redisClient.getClient();
       client.setEx(
         req.originalUrl,
         3000,
