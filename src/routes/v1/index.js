@@ -3,6 +3,8 @@ const express = require('express');
 const songRoute = require('./song.route');
 const blogRoute = require('./blog.route')
 const noteRoute = require('./note.route')
+const performanceRoute = require('./performance.route')
+
 
 
 const router = express.Router();
@@ -19,6 +21,10 @@ const defaultRoutes = [
   {
     path: '/notes',
     route: noteRoute,
+  },
+  {
+    path: '/performance',
+    route: performanceRoute,
   }
 ];
 
