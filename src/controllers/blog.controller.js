@@ -5,10 +5,8 @@ const upload = require("../utils/fileUpload");
 
 const getAllBlogs =  catchAsync(async (req, res) => {
       const blogs = await BlogService.getAllBlogs();
-      if(redisClient.status = 'connect'){
-         await redisClient.client.setEx(req.originalUrl, 3600, blogs);
+    
       res.json(blogs);
-      }
      
 })
   
@@ -21,7 +19,7 @@ const getAllBlogs =  catchAsync(async (req, res) => {
     }
   };
   
-  const createBlog = async (req, res) => {
+  const createBlog = catchAsync(async (req, res) => {
     try {
         const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
 
@@ -30,14 +28,14 @@ const getAllBlogs =  catchAsync(async (req, res) => {
       imageUrl: imageUrl,
     };
       const newBlog = await BlogService.createBlog(newBlogData);
-      redisClient.del('/blogs');
+      // redisClient.del('/blogs');
       res.status(201).json(newBlog);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  };
+  })
   
-  const updateBlog = async (req, res) => {
+  const updateBlog = catchAsync(async (req, res) => {
     try {
         const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
 
@@ -46,22 +44,22 @@ const getAllBlogs =  catchAsync(async (req, res) => {
       imageUrl: imageUrl,
     };
       const updatedBlog = await BlogService.updateBlog(req.params.id,updatedBlogData);
-      redisClient.del('/blogs');
+      // redisClient.del('/blogs');
       res.json(updatedBlog);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  };
+  });
   
-  const deleteBlog = async (req, res) => {
+  const deleteBlog = catchAsync(async (req, res) => {
     try {
       const deletedBlog = await BlogService.deleteBlog(req.params.id);
-      redisClient.del('/blogs');
+      // redisClient.del('/blogs');
       res.json(deletedBlog);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  };
+  });
   
   module.exports = {
     getAllBlogs,

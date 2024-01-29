@@ -17,13 +17,9 @@ const startServer = async () => {
     // })
     // .catch(error => console.error('Neo4j connection error:', error));
     
-    redisClient()
-    .then(() => {
-      console.log("Redis connection established");
-    })
-    .catch(error => {
-      console.error("Error establishing Redis connection:", error);
-    });
+
+     await redisClient();
+      
 
     const server = app.listen(process.env.PORT, () => {
       logger.info(`Server is running on http://localhost:${process.env.PORT}`);

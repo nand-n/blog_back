@@ -7,11 +7,11 @@ router
     .get(BlogController.getAllBlogs)
     .post(BlogController.createBlog );
 
-// router
-//     .route('/:id')
-//     .get(BlogController.getBlogById)
-//     .patch(BlogController.updateBlog)
-//     .delete(BlogController.deleteBlog)
+router
+    .route('/:id')
+    .get(BlogController.getBlogById)
+    .patch(BlogController.updateBlog)
+    .delete(BlogController.deleteBlog)
     
 
 
