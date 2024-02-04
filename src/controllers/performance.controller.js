@@ -31,12 +31,7 @@ const getAllPerformance =  catchAsync(async (req, res) => {
   const createPerformance = catchAsync(async (req, res) => {
     try {
         const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
-
-    const newperformanceData = {
-      ...req.body,
-      imageUrl: imageUrl,
-    };
-      const newperformance = await PerformanceService.createPerformance(newperformanceData);
+      const newperformance = await PerformanceService.createPerformance(req.body);
       // redisClient.del('/performance');
       res.status(201).json(newperformance);
     } catch (error) {
@@ -46,13 +41,7 @@ const getAllPerformance =  catchAsync(async (req, res) => {
   
   const updatePerformance = catchAsync(async (req, res) => {
     try {
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
-
-    const updatedperformanceData = {
-      ...req.body,
-      imageUrl: imageUrl,
-    };
-      const updatedperformance = await PerformanceService.updatePerformance(req.params.id,updatedperformanceData);
+      const updatedperformance = await PerformanceService.updatePerformance(req.params.id,req.body);
       // redisClient.del('/performance');
       res.json(updatedperformance);
     } catch (error) {
