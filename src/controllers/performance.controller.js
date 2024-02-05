@@ -45,9 +45,36 @@ const getAllPerformance =  catchAsync(async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   })
-  const createMonthlylyGoal = catchAsync(async (req, res) => {
+  const createMonthlyGoal = catchAsync(async (req, res) => {
     try {
-      const newperformance = await PerformanceService.createMonthlyGoal( req.params.yearlyGoalId,req.body);
+      const newperformance = await PerformanceService.createMonthlyGoal( req.params.quarterlyGoalId,req.body);
+
+      res.status(201).json(newperformance);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+  const createWeeklyGoal = catchAsync(async (req, res) => {
+    try {
+      const newperformance = await PerformanceService.createWeeklyGoal( req.params.monthlyGoalId,req.body);
+
+      res.status(201).json(newperformance);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+  const createDailyGoal = catchAsync(async (req, res) => {
+    try {
+      const newperformance = await PerformanceService.createDailyGoal( req.params.weeklyGoalId,req.body);
+
+      res.status(201).json(newperformance);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+  const createDailyTasks = catchAsync(async (req, res) => {
+    try {
+      const newperformance = await PerformanceService.createDailyTasks( req.params.dailyGoalId,req.body);
 
       res.status(201).json(newperformance);
     } catch (error) {
@@ -78,7 +105,12 @@ const getAllPerformance =  catchAsync(async (req, res) => {
   module.exports = {
     getAllPerformance,
     getPerformanceById,
-    createPerformance,
+    createYearlyGoal,
+    createQuarterlyGoal,
+    createMonthlyGoal,
+    createWeeklyGoal,
+    createDailyGoal,
+    createDailyTasks,
     updatePerformance,
     deletePerformance,
   };
