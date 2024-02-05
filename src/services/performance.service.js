@@ -11,22 +11,77 @@ const getAllPerformance = async () => {
   
   const getPerformanceById = async (id) => {
     try {
-      const Performance = await Performance.findById(id);
-      return Performance;
+      const performance = await Performance.findById(id);
+      return performance;
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const createPerformance = async (PerformanceData) => {
+  const createYearlyGoal = async (yearlyGoalData) => {
     try {
-      const newPerformance = new Performance(PerformanceData);
-      await newPerformance.save();
-      return newPerformance;
+      const createdYearlyGoal = await Performance.create(yearlyGoalData);
+        return createdYearlyGoal;
     } catch (error) {
       throw new Error(error);
     }
   };
+  const createQuarterlyGoal = async (yearlyGoalId, quarterlyGoalData) => {
+    try {
+      const yearlyGoal = await Performance.findById(yearlyGoalId);
+        yearlyGoal.quarters.push(quarterlyGoalData);
+        await yearlyGoal.save();
+        return yearlyGoal;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const createMonthlyGoal = async (yearlyGoalId, quarterIndex, monthlyGoalData) => {
+    try {
+      const yearlyGoal = await Performance.findById(yearlyGoalId);
+      yearlyGoal.quarters[quarterIndex].months[monthIndex].weeks.push(weeklyGoalData);
+      await yearlyGoal.save();
+      return yearlyGoal;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const createWeeklyGoal = async (yearlyGoalId, quarterIndex, monthIndex, weeklyGoalData) => {
+    try {
+      const yearlyGoal = await Performance.findById(yearlyGoalId);
+      yearlyGoal.quarters[quarterIndex].months[monthIndex].weeks.push(weeklyGoalData);
+      await yearlyGoal.save();
+      return yearlyGoal;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const createDailyGoal = async (yearlyGoalId, quarterIndex, monthIndex, weekIndex, dailyGoalData) => {
+    try {
+      const yearlyGoal = await Performance.findById(yearlyGoalId);
+        yearlyGoal.quarters[quarterIndex].months[monthIndex].weeks[weekIndex].days.push(dailyGoalData);
+        await yearlyGoal.save();
+        return yearlyGoal;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+
+  const createTask = async (yearlyGoalId, quarterIndex, monthIndex, weekIndex, dayIndex, taskData) => {
+    try {
+      const yearlyGoal = await Performance.findById(yearlyGoalId);
+      yearlyGoal.quarters[quarterIndex].months[monthIndex].weeks[weekIndex].days[dayIndex].tasks.push(taskData);
+      await yearlyGoal.save();
+      return yearlyGoal;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   
   const updatePerformance = async (id, updatedData) => {
     try {
@@ -51,7 +106,12 @@ const getAllPerformance = async () => {
   module.exports = {
     getAllPerformance,
     getPerformanceById,
-    createPerformance,
+    createYearlyGoal,
+    createQuarterlyGoal,
+    createMonthlyGoal,
+    createWeeklyGoal,
+    createDailyGoal,
+    createTask,
     updatePerformance,
     deletePerformance,
   };
