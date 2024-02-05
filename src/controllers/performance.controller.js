@@ -28,11 +28,27 @@ const getAllPerformance =  catchAsync(async (req, res) => {
     }
   };
   
-  const createPerformance = catchAsync(async (req, res) => {
+  const createYearlyGoal = catchAsync(async (req, res) => {
     try {
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
-      const newperformance = await PerformanceService.createPerformance(req.body);
-      // redisClient.del('/performance');
+      const newperformance = await PerformanceService.createYearlyGoal(req.body);
+      res.status(201).json(newperformance);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+  const createQuarterlyGoal = catchAsync(async (req, res) => {
+    try {
+      const newperformance = await PerformanceService.createQuarterlyGoal( req.params.yearlyGoalId,req.body);
+
+      res.status(201).json(newperformance);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  })
+  const createMonthlylyGoal = catchAsync(async (req, res) => {
+    try {
+      const newperformance = await PerformanceService.createMonthlyGoal( req.params.yearlyGoalId,req.body);
+
       res.status(201).json(newperformance);
     } catch (error) {
       res.status(500).json({ error: error.message });
