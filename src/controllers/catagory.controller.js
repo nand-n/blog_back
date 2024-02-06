@@ -1,3 +1,4 @@
+const { CatagoryService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 
 const getAllCategories =  catchAsync(async (req, res) => {
@@ -6,15 +7,16 @@ const getAllCategories =  catchAsync(async (req, res) => {
 })
 
 const createCategory =  catchAsync(async (req, res) => {
-    const category = await CatagoryService.createCatagories(req.body);
+    const category = await CatagoryService.createCatagory(req.body);
     res.json(category);
 })
 const deleteCategory =  catchAsync(async (req, res) => {
-    const category = await CatagoryService.deleteCatagories(req.body);
+    const category = await CatagoryService.deleteCatagory(req.body);
     res.json(category);
 })
 
 module.exports ={
     getAllCategories,
-    createCategory
+    createCategory,
+    deleteCategory
 }
