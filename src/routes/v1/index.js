@@ -4,6 +4,7 @@ const songRoute = require('./song.route');
 const blogRoute = require('./blog.route')
 const noteRoute = require('./note.route')
 const performanceRoute = require('./performance.route')
+const catagoryRoute = require('./catagory.route')
 
 
 
@@ -25,6 +26,10 @@ const defaultRoutes = [
   {
     path: '/performance',
     route: performanceRoute,
+  },
+  {
+    path: '/catagory',
+    route: catagoryRoute,
   }
 ];
 

@@ -13,7 +13,7 @@ const getAllBlogs =  catchAsync(async (req, res) => {
       );
       res.json(blogs);
 })
-  const getBlogById = async (req, res) => {
+  const getBlogById = catchAsync (async(req, res) => {
     try {
       const blog = await BlogService.getBlogById(req.params.id);
       const client = redisClient.getClient();
@@ -26,7 +26,7 @@ const getAllBlogs =  catchAsync(async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  };
+  });
   
   const createBlog = catchAsync(async (req, res) => {
     try {
