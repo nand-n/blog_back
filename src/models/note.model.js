@@ -6,6 +6,7 @@ const todoSchema = new mongoose.Schema({
   description: String,
   imageUrl: String,
   body: String,
+  color:String,
   category: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   createdDate: { type: Date, default: Date.now },
 });
