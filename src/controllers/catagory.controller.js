@@ -1,5 +1,4 @@
-const Category = require('../models/categoryModel');
-
+const catchAsync = require("../utils/catchAsync");
 
 const getAllCategories =  catchAsync(async (req, res) => {
     const categories = await CatagoryService.getAllCatagories();
@@ -7,11 +6,13 @@ const getAllCategories =  catchAsync(async (req, res) => {
 })
 
 const createCategory =  catchAsync(async (req, res) => {
-    const category = await CatagoryService.getAllCatagories(req.body);
-
+    const category = await CatagoryService.createCatagories(req.body);
     res.json(category);
 })
-
+const deleteCategory =  catchAsync(async (req, res) => {
+    const category = await CatagoryService.deleteCatagories(req.body);
+    res.json(category);
+})
 
 module.exports ={
     getAllCategories,
