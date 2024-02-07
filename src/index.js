@@ -17,7 +17,7 @@ const startServer = async () => {
     // })
     // .catch(error => console.error('Neo4j connection error:', error));
     
-    redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
+    // redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
       
 
     const server = app.listen(process.env.PORT, () => {
