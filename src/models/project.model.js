@@ -4,10 +4,10 @@ const projectSchema = new mongoose.Schema({
   title: String,
   description: String,
   imageUrl: String,
-  topics:[String],
+  topics: [String],
   createdDate: { type: Date, default: Date.now },
 });
 
-const Note = mongoose.model('Project', projectSchema);
+const Project = mongoose.model('Project', projectSchema);
 
-module.exports = Note;
+module.exports = Project;
