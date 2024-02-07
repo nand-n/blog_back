@@ -7,8 +7,6 @@ const performanceRoute = require('./performance.route')
 const catagoryRoute = require('./catagory.route')
 const projectRoute = require('./project.route')
 
-
-
 const router = express.Router();
 
 const defaultRoutes = [
