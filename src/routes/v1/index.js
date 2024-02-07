@@ -5,6 +5,7 @@ const blogRoute = require('./blog.route')
 const noteRoute = require('./note.route')
 const performanceRoute = require('./performance.route')
 const catagoryRoute = require('./catagory.route')
+const projectRoute = require('./project.route')
 
 
 
@@ -30,6 +31,10 @@ const defaultRoutes = [
   {
     path: '/catagory',
     route: catagoryRoute,
+  },
+  {
+    path: '/project',
+    route: projectRoute,
   }
 ];
 
