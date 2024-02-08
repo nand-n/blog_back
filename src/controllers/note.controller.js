@@ -30,13 +30,7 @@ const getAllnote =  catchAsync(async (req, res) => {
   
   const createNote = catchAsync(async (req, res) => {
     try {
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
-
-    const newnoteData = {
-      ...req.body,
-      imageUrl: imageUrl,
-    };
-      const newnote = await NoteService.createNote(newnoteData);
+      const newnote = await NoteService.createNote(req.body);
       // redisClient.del('/note');
       res.status(201).json(newnote);
     } catch (error) {
