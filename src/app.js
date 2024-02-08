@@ -6,6 +6,7 @@ const morgan = require('./config/morgan');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
+const path = require('path');
 
 const app = express();
 
@@ -27,8 +28,11 @@ app.use(cors({
 }));
 app.options('*', cors());
 
+// Serve static files from the 'public' directory
 // v1 api routes
 app.use('/api/v1', routes);
+app.use(express.static( path.join(__dirname, '../uploads')));
+
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

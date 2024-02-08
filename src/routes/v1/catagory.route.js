@@ -10,7 +10,7 @@ router
 
 router
     .route('/:id')
-    .get(CatagoryController.getBlogById)
+    // .get(CatagoryController.)
     // .patch(upload.single("image"),CatagoryController.updateBlog)
     .delete(CatagoryController.deleteCategory)
     

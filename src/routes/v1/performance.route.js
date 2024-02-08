@@ -5,7 +5,7 @@ const router = express.Router();
 router
     .route('/')
     .get(PerformanceController.getAllPerformance)
-    .post(PerformanceController.createPerformance );
+    .post(PerformanceController.createYearlyGoal );
 
 router
     .route('/:id')
