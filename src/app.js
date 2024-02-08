@@ -23,10 +23,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // enable cors
+app.use(cors());
 app.use(cors({
-  origin: '*'
+  origin: 'http://localhost:5173'
 }));
-app.options('*', cors());
+// app.use(cors({
+//   origin: '*'
+// }));
+// app.options('*', cors());
 
 // Serve static files from the 'public' directory
 // v1 api routes
