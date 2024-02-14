@@ -11,7 +11,7 @@ const createCategory =  catchAsync(async (req, res) => {
     res.json(category);
 })
 const deleteCategory =  catchAsync(async (req, res) => {
-    const category = await CatagoryService.deleteCatagory(req.body);
+    const category = await CatagorySoervice.deleteCatagory(req.body);
     res.json(category);
 })
 
