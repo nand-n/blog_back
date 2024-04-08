@@ -2,7 +2,7 @@
 const app = require('./app');
 const logger = require('./config/logger');
 const connectToMongoDB = require('./config/mongoDb');
-const connectNeo4j = require('./config/neon4j');
+// const connectNeo4j = require('./config/neon4j');
 const redisConfig = require("./config/redis");
 const redis = require('redis');
 

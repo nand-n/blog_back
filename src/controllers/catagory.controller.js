@@ -10,13 +10,18 @@ const createCategory =  catchAsync(async (req, res) => {
     const category = await CatagoryService.createCatagory(req.body);
     res.json(category);
 })
+const updateCategory =  catchAsync(async (req, res) => {
+    const category = await CatagoryService.updateCatagory(req.params.id, req.body);
+    res.json(category);
+})
 const deleteCategory =  catchAsync(async (req, res) => {
-    const category = await CatagorySoervice.deleteCatagory(req.body);
+    const category = await CatagoryService.deleteCatagory(req.params.id);
     res.json(category);
 })
 
 module.exports ={
     getAllCategories,
     createCategory,
-    deleteCategory
+    deleteCategory,
+    updateCategory
 }

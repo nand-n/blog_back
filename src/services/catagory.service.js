@@ -30,9 +30,7 @@ const getAllCatagories = async () => {
   
   const updateCatagory = async (id, updatedData) => {
     try {
-      const updatedcatagory = await Catagory.findByIdAndUpdate(id, updatedData, {
-        new: true,
-      });
+      const updatedcatagory = await Catagory.findByIdAndUpdate(id, updatedData , { new: true });
       return updatedcatagory;
     } catch (error) {
       throw new Error(error);
