@@ -30,7 +30,7 @@ const getAllProjects =  catchAsync(async (req, res) => {
   
   const createProject = catchAsync(async (req, res) => {
     try {
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
+        const imageUrl = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
 
     const newprojectData = {
       ...req.body,

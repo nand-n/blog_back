@@ -32,7 +32,7 @@ const getAllnote =  catchAsync(async (req, res) => {
     try {
       const newnote = await NoteService.createNote(req.body);
       // redisClient.del('/note');
-      res.status(201).json(newnote);
+      res.status(200).json(newnote);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
