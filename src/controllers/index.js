@@ -4,3 +4,4 @@ module.exports.NoteController = require('./note.controller');
 module.exports.PerformanceController = require('./performance.controller');
 module.exports.CatagoryController = require('./catagory.controller');
 module.exports.ProjectController = require('./project.controller');
+module.exports.FinanceController = require('./finance.controller');

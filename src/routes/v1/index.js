@@ -6,7 +6,7 @@ const noteRoute = require('./note.route')
 const performanceRoute = require('./performance.route')
 const catagoryRoute = require('./catagory.route')
 const projectRoute = require('./project.route')
-
+const financeRoute= require('./finance.route')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -33,6 +33,10 @@ const defaultRoutes = [
   {
     path: '/project',
     route: projectRoute,
+  },
+  {
+    path: '/finance',
+    route: financeRoute,
   }
 ];
 

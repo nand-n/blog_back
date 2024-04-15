@@ -4,3 +4,5 @@ module.exports.Note=require('./note.model')
 module.exports.Performance=require('./goal.mode')
 module.exports.Catagory=require('./catagory.model')
 module.exports.Project=require('./project.model')
+module.exports.Finance=require('./finance.model')
+
