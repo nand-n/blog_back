@@ -29,13 +29,13 @@ const createIncome = async (month, amount) => {
         }
       });
       await existingIncome.save();
-      return existingIncome;
+      return existingIncome.income[0];
     } else {
       const newIncome = new Finance({
         income: [{ month, amount }],
       });
       await newIncome.save();
-      return newIncome;
+      return newIncome.income[0];
     }
   } catch (error) {
     throw new Error(error);
