@@ -1,4 +1,6 @@
+const { CatagoryController } = require("../controllers");
 const { Finance } = require("../models");
+const { getCatagory } = require("./catagory.service");
 
 const getAllIncomes = async () => {
   try {
@@ -80,8 +82,11 @@ const updateIncome = async (id, month, amount) => {
 // Expense CRUD functions
 const getAllExpenses = async () => {
     try {
-      const expenses = await Finance.find({ expenses: { $exists: true, $not: { $size: 0 } } }, { expenses: 1, _id: 0 });
-      return expenses.map((finance) => finance.expenses).flat();
+      const finances = await Finance.find({ expenses: { $exists: true, $not: { $size: 0 } } }, { expenses: 1, _id: 0 });
+
+      const populatedExpenses = await Finance.populate(finances, { path: 'expenses.category' });
+  
+      return populatedExpenses.map((finance) => finance.expenses).flat();
     } catch (error) {
       throw new Error(error);
     }
@@ -96,13 +101,18 @@ const getAllExpenses = async () => {
     }
   };
   
-  const createExpense = async ( name , description, amount) => {
+  const createExpense = async ( name , description, amount, catagoryId) => {
     try {
+      const category =await getCatagory(catagoryId);
+      if (!category) {
+        throw new Error('Category not found');
+      }
       const newExpense = new Finance({ 
-        expenses: [{ name , description,amount }],
+        expenses: [{ name , description,amount ,category: category }],
       });
       await newExpense.save();
-      return newExpense;
+      const populatedExpense = await Finance.findById(newExpense._id).populate('expenses.category');
+      return populatedExpense.expenses[0];
     } catch (error) {
       throw new Error(error);
     }

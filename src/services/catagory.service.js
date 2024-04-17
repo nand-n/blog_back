@@ -8,6 +8,15 @@ const getAllCatagories = async () => {
       throw new Error(error);
     }
   };
+
+  const getCatagory = async (id) => {
+    try {
+      const catagories = await Catagory.findOne({ _id: id });
+      return catagories;
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
   
   const getCatagoryById = async (id) => {
     try {
@@ -52,4 +61,5 @@ const getAllCatagories = async () => {
     createCatagory,
     updateCatagory,
     deleteCatagory,
+    getCatagory
   };

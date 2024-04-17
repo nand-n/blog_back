@@ -10,7 +10,7 @@ router
 
 router
     .route('/:id')
-    // .get(CatagoryController.)
+    .get(CatagoryController.getCategory)
     .patch(CatagoryController.updateCategory)
     .delete(CatagoryController.deleteCategory)
     
