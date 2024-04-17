@@ -20,11 +20,23 @@ const getIncomeById = async (id) => {
 
 const createIncome = async (month, amount) => {
   try {
-    const newIncome = new Finance({ 
+  const existingIncome = await Finance.findOne({ "income.month": month });
+
+    if (existingIncome) {
+      existingIncome.income.forEach((item) => {
+        if (item.month === month) {
+          item.amount = amount;
+        }
+      });
+      await existingIncome.save();
+      return existingIncome;
+    } else {
+      const newIncome = new Finance({
         income: [{ month, amount }],
       });
-    await newIncome.save();
-    return newIncome;
+      await newIncome.save();
+      return newIncome;
+    }
   } catch (error) {
     throw new Error(error);
   }
