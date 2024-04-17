@@ -77,8 +77,8 @@ const getExpenseById = async (req, res) => {
 
 const createExpense = async (req, res) => {
   try {
-    const { name , description, amount } = req.body;
-    const expense = await FinanceService.createExpense(name,description, amount);
+    const { name , description, amount , catagoryId  } = req.body;
+    const expense = await FinanceService.createExpense(name,description, amount , catagoryId);
     res.status(201).json(expense);
   } catch (error) {
     res.status(500).json({ error: error.message });
