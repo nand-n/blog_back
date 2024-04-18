@@ -129,8 +129,8 @@ const getAllPayments = async (req, res) => {
   
   const createPayment = async (req, res) => {
     try {
-      const { name,description, amount } = req.body;
-      const payment = await FinanceService.createPayment( name,description, amount);
+      const { name,description, amount , categoryId } = req.body;
+      const payment = await FinanceService.createPayment( name,description, amount , categoryId);
       res.status(201).json(payment);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -140,8 +140,8 @@ const getAllPayments = async (req, res) => {
   const updatePaymentById = async (req, res) => {
     try {
       const { id } = req.params;
-      const { description, amount } = req.body;
-      const updatedPayment = await FinanceService.updatePayment(id, description, amount);
+      const {name,description, amount , categoryId } = req.body;
+      const updatedPayment = await FinanceService.updatePayment(id,name,description, amount , categoryId);
       res.status(200).json(updatedPayment);
     } catch (error) {
       res.status(500).json({ error: error.message });

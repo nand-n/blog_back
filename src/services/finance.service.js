@@ -117,29 +117,7 @@ const getAllExpenses = async () => {
       throw new Error(error);
     }
   };
-  
-  // const updateExpense = async (id,name,description, amount) => {
-  //   try {
-  //       const finance = await Finance.findOne({ 'expenses._id': id });
-  //       if (!finance) {
-  //         throw new Error('Expense not found');
-  //       }
-    
-  //       const index = finance.expenses.findIndex(item => item._id.toString() === id);
-  //       if (index === -1) {
-  //         throw new Error('Expense not found');
-  //       }
-    
-  //       finance.expenses[index].amount = amount;
-  //       finance.expenses[index].name = name
-  //       finance.expenses[index].description = description
-    
-  //       await finance.save();
-  //       return finance.expenses[index];
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // };
+
   const updateExpense = async (id, name, description, amount, categoryId) => {
     try {
       const finance = await Finance.findOne({ 'expenses._id': id });
@@ -186,9 +164,13 @@ const getAllExpenses = async () => {
   };
   
   const getAllPayments = async () => {
+    
     try {
-      const payments = await Finance.find({ payments: { $exists: true, $not: { $size: 0 } } }, { payments: 1, _id: 0 });
-      return payments.map((finance) => finance.payments).flat();
+
+      const populatedPayments = await Finance.find({ payments: { $exists: true, $not: { $size: 0 } } })
+                                      .populate('payments.category', 'name');
+
+return populatedPayments.map((finance) => finance.payments).flat();
     } catch (error) {
       throw new Error(error);
     }
@@ -202,40 +184,62 @@ const getAllExpenses = async () => {
       throw new Error(error);
     }
   };
-  
-  const createPayment = async (name,description, amount) => {
+
+  const createPayment = async (name, description, amount, categoryId) => {
     try {
+      const category = await getCatagory(categoryId);
+      
+      if (!category) {
+        throw new Error('Category not found');
+      }
+      
       const newPayment = new Finance({ 
-        payments: [{name,description, amount }],
+        payments: [{ name, description, amount, category: category }],
       });
+      
       await newPayment.save();
-      return newPayment;
+      
+      const populatedPayment = await Finance.findById(newPayment._id).populate('payments.category');
+      
+      return populatedPayment.payments[0];
     } catch (error) {
       throw new Error(error);
     }
   };
   
-  const updatePayment = async (id, amount, date) => {
+  
+  const updatePayment = async (id, name, description, amount, categoryId) => {
     try {
-        const finance = await Finance.findOne({ 'payments._id': id });
-        if (!finance) {
-          throw new Error('Payment not found');
-        }
-    
-        const index = finance.payments.findIndex(item => item._id.toString() === id);
-        if (index === -1) {
-          throw new Error('Payment not found');
-        }
-    
-        finance.payments[index].amount = amount;
-        finance.payments[index].date = date;
-    
-        await finance.save();
-        return finance.payments[index];
+      const finance = await Finance.findOne({ 'payments._id': id });
+      
+      if (!finance) {
+        throw new Error('Payment not found');
+      }
+  
+      const index = finance.payments.findIndex(item => item._id.toString() === id);
+  
+      if (index === -1) {
+        throw new Error('Payment not found');
+      }
+  
+      const category = await getCatagory(categoryId);
+  
+      if (!category) {
+        throw new Error('Category not found');
+      }
+  
+      finance.payments[index].name = name;
+      finance.payments[index].description = description;
+      finance.payments[index].amount = amount;
+      finance.payments[index].category = category;
+  
+      await finance.save();
+      return finance.payments[index];
     } catch (error) {
       throw new Error(error);
     }
   };
+  
   
   const deletePayment = async (id) => {
     try {

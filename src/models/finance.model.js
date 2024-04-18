@@ -18,7 +18,9 @@ const paymentSchema = new mongoose.Schema({
   name:{type: String , required:false}, 
   description:{type: String , required:false , nullable:true },
   amount: { type: Number, required: false },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' } 
+
 });
 
 const financeSchema = new mongoose.Schema({
