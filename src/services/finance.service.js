@@ -118,37 +118,68 @@ const getAllExpenses = async () => {
     }
   };
   
-  const updateExpense = async (id,name,description, amount) => {
+  // const updateExpense = async (id,name,description, amount) => {
+  //   try {
+  //       const finance = await Finance.findOne({ 'expenses._id': id });
+  //       if (!finance) {
+  //         throw new Error('Expense not found');
+  //       }
+    
+  //       const index = finance.expenses.findIndex(item => item._id.toString() === id);
+  //       if (index === -1) {
+  //         throw new Error('Expense not found');
+  //       }
+    
+  //       finance.expenses[index].amount = amount;
+  //       finance.expenses[index].name = name
+  //       finance.expenses[index].description = description
+    
+  //       await finance.save();
+  //       return finance.expenses[index];
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // };
+  const updateExpense = async (id, name, description, amount, categoryId) => {
     try {
-        const finance = await Finance.findOne({ 'expenses._id': id });
-        if (!finance) {
-          throw new Error('Expense not found');
-        }
-    
-        const index = finance.expenses.findIndex(item => item._id.toString() === id);
-        if (index === -1) {
-          throw new Error('Expense not found');
-        }
-    
-        finance.expenses[index].amount = amount;
-        finance.expenses[index].name = name
-        finance.expenses[index].description = description
-    
-        await finance.save();
-        return finance.expenses[index];
+      const finance = await Finance.findOne({ 'expenses._id': id });
+      if (!finance) {
+        throw new Error('Expense not found');
+      }
+  
+      const index = finance.expenses.findIndex(item => item._id.toString() === id);
+      if (index === -1) {
+        throw new Error('Expense not found');
+      }
+  
+      const category = await getCatagory(categoryId);
+  
+      if (!category) {
+        throw new Error('Category not found');
+      }
+  
+      finance.expenses[index].amount = amount;
+      finance.expenses[index].name = name;
+      finance.expenses[index].description = description;
+      finance.expenses[index].category = category;
+  
+      await finance.save();
+      return finance.expenses[index];
     } catch (error) {
       throw new Error(error);
     }
   };
   
+  
   const deleteExpense = async (id) => {
     try {
-      const deletedExpense = await Finance.findOneAndUpdate(
-        { 'expenses._id': id },
-        { $pull: { expenses: { _id: id } } },
-        { new: true }
-      );
-      return deletedExpense ? deletedExpense.expenses[0] : null;
+      const deletedExpense = await Finance.findOneAndDelete({ 'expenses._id': id });
+
+      if (!deletedExpense) {
+        throw new Error('Expense not found');
+      }
+  
+      return deletedExpense.expenses.find(expense => expense._id.toString() === id);
     } catch (error) {
       throw new Error(error);
     }

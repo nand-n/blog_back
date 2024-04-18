@@ -88,8 +88,8 @@ const createExpense = async (req, res) => {
 const updateExpenseById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name,description, amount } = req.body;
-    const updatedExpense = await FinanceService.updateExpense(id,name,description, amount);
+    const { name,description, amount , categoryId } = req.body;
+    const updatedExpense = await FinanceService.updateExpense(id,name,description, amount , categoryId);
     res.status(200).json(updatedExpense);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -99,8 +99,8 @@ const updateExpenseById = async (req, res) => {
 const deleteExpenseById = async (req, res) => {
   try {
     const { id } = req.params;
-    await FinanceService.deleteExpense(id);
-    res.status(204).send();
+      const deltedExpence = await FinanceService.deleteExpense(id);
+    res.send(deltedExpence);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
