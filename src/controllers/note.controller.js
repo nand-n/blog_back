@@ -1,27 +1,21 @@
-const redisClient = require("../config/redis");
+// const redisClient = require("../config/redis");
 const { NoteService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 const upload = require("../utils/fileUpload");
 
 const getAllnote =  catchAsync(async (req, res) => {
       const note = await NoteService.getAllNotes();
-      const client = redisClient.getClient();
-      client.setEx(
-        req.originalUrl,
-        3000,
-        JSON.stringify({ message: "Data from cache", note })
-      );
+      // const client = redisClient.getClient();
+      // client.setEx(
+      //   req.originalUrl,
+      //   3000,
+      //   JSON.stringify({ message: "Data from cache", note })
+      // );
       res.json(note);
 })
   const getNoteById = async (req, res) => {
     try {
       const note = await NoteService.getNoteById(req.params.id);
-      const client = redisClient.getClient();
-      client.setEx(
-        req.originalUrl,
-        3000,
-        JSON.stringify({ message: "Data from cache", note })
-      );
       res.json(note);
     } catch (error) {
       res.status(500).json({ error: error.message });
