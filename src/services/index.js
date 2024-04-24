@@ -6,4 +6,5 @@ module.exports.PerformanceService = require('./performance.service')
 module.exports.CatagoryService = require('./catagory.service')
 module.exports.ProjectService = require('./projects.service')
 module.exports.FinanceService = require('./finance.service')
+module.exports.ConversationService = require('./conversation.service')
 
