@@ -32,17 +32,17 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-  neo4j:
-    image: neo4j
-    container_name: neo4j
-    restart: always
-    environment:
-      NEO4J_AUTH: neo4j/streams
-    ports:
-      - "7474:7474"
-      - "7687:7687"
-    volumes:
-      - neo4jdata:/data
+  # neo4j:
+  #   image: neo4j
+  #   container_name: neo4j
+  #   restart: always
+  #   environment:
+  #     NEO4J_AUTH: neo4j/streams
+  #   ports:
+  #     - "7474:7474"
+  #     - "7687:7687"
+  #   volumes:
+  #     - neo4jdata:/data
 
   blog_backend_app:
     build:
@@ -56,18 +56,18 @@ services:
       - mongo
     volumes:
       - ./:/app
-  redis-service:
-    image: redis:latest
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - /path/to/local/dаta:/root/redis
-      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
-    environment:
-      - REDIS_PASSWORD=my-password
-      - REDIS_PORT=6379
-      - REDIS_DATABASES=16
+  # redis-service:
+  #   image: redis:latest
+  #   restart: always
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /path/to/local/dаta:/root/redis
+  #     - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+  #   environment:
+  #     - REDIS_PASSWORD=my-password
+  #     - REDIS_PORT=6379
+  #     - REDIS_DATABASES=16
 
 volumes:
   blog:
