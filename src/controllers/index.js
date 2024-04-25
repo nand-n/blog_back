@@ -6,3 +6,4 @@ module.exports.CatagoryController = require('./catagory.controller');
 module.exports.ProjectController = require('./project.controller');
 module.exports.FinanceController = require('./finance.controller');
 module.exports.ConversationController = require('./conversation.controller')
+module.exports.GoalController = require('./goal.controller')

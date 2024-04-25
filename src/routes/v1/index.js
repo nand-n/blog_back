@@ -8,6 +8,7 @@ const catagoryRoute = require('./catagory.route')
 const projectRoute = require('./project.route')
 const financeRoute= require('./finance.route')
 const conversationRoute = require('./conversation.route')
+const goalRoute = require('./goal.route')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -42,6 +43,10 @@ const defaultRoutes = [
   {
     path: '/conversation',
     route: conversationRoute,
+  },
+  {
+    path: '/goal',
+    route: goalRoute,
   }
 ];
 

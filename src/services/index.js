@@ -7,4 +7,7 @@ module.exports.CatagoryService = require('./catagory.service')
 module.exports.ProjectService = require('./projects.service')
 module.exports.FinanceService = require('./finance.service')
 module.exports.ConversationService = require('./conversation.service')
+module.exports.GoalService = require('./goal.service')
+
+
 
