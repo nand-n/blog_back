@@ -8,3 +8,7 @@ module.exports.FinanceController = require('./finance.controller');
 module.exports.ConversationController = require('./conversation.controller')
 module.exports.GoalController = require('./goal.controller')
 module.exports.BusinessPlanController = require('./bussinessPlan.controller')
+module.exports.TasksController = require('./tasks.controller')
+
+
+

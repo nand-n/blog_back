@@ -8,4 +8,6 @@ module.exports.Finance=require('./finance.model')
 module.exports.Conversation=require('./conversation.model')
 module.exports.Goal=require('./goal.model')
 module.exports.BusinessPlan=require('./bussinessPlan.model')
+module.exports.Task=require('./tasks.model')
+
 

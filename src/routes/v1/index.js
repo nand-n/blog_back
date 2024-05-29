@@ -10,6 +10,7 @@ const financeRoute= require('./finance.route')
 const conversationRoute = require('./conversation.route')
 const goalRoute = require('./goal.route')
 const bussinessPlanRoute = require('./bussnessPlan.route')
+const tasksRoute= require('./tasks.route')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -53,6 +54,10 @@ const defaultRoutes = [
   {
     path: '/bussinessPlan',
     route: bussinessPlanRoute,
+  },
+  {
+    path: '/tasks',
+    route: tasksRoute,
   }
 ];
 
