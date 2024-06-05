@@ -2,6 +2,8 @@ const redisClient = require("../config/redis");
 const { ProjectService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
 const upload = require("../utils/fileUpload");
+const cloudinary = require('cloudinary').v2;
+
 
 const getAllProjects =  catchAsync(async (req, res) => {
       const projects = await ProjectService.getAllProjects();
@@ -30,11 +32,17 @@ const getAllProjects =  catchAsync(async (req, res) => {
   
   const createProject = catchAsync(async (req, res) => {
     try {
-        const imageUrl = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
+        // const imageUrl = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : '';
+        const fileStr = req.body.data;
+        const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+          upload_preset: 'ml_default',
+        });
 
     const newprojectData = {
       ...req.body,
-      imageUrl: imageUrl,
+      // imageUrl: imageUrl,
+      imageUrl: uploadedResponse.secure_url,
+
     };
       const newproject = await ProjectService.createProject(newprojectData);
       // redisClient.del('/projects');
