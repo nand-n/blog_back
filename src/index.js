@@ -2,6 +2,7 @@
 const app = require('./app');
 const logger = require('./config/logger');
 const connectToMongoDB = require('./config/mongoDb');
+const cloudinary = require('cloudinary').v2;
 // const connectNeo4j = require('./config/neon4j');
 // const redisConfig = require("./config/redis");
 const redis = require('redis');
@@ -18,6 +19,11 @@ const startServer = async () => {
     // .catch(error => console.error('Neo4j connection error:', error));
     
     // redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.API_KEY,
+      api_secret: process.env.API_SECRET,
+    });
       
 
     const server = app.listen(process.env.PORT, () => {
