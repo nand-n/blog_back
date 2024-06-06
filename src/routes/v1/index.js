@@ -11,6 +11,7 @@ const conversationRoute = require('./conversation.route')
 const goalRoute = require('./goal.route')
 const bussinessPlanRoute = require('./bussnessPlan.route')
 const tasksRoute= require('./tasks.route')
+const imageUpload = require('./imageUpload.route')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -58,6 +59,10 @@ const defaultRoutes = [
   {
     path: '/tasks',
     route: tasksRoute,
+  },
+  {
+    path:'/upload-image',
+    route: imageUpload
   }
 ];
 
