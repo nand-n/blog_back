@@ -6,12 +6,12 @@ const router = express.Router();
 router
     .route('/')
     .get(ProjectController.getAllProjects)
-    .post(upload.single("image"), ProjectController.createProject );
+    .post(ProjectController.createProject );
 
 router
     .route('/:id')
     .get(ProjectController.getProjectById)
-    .patch(upload.single("image"),ProjectController.updateProject)
+    .patch(ProjectController.updateProject)
     .delete(ProjectController.deleteProject)
     
 
