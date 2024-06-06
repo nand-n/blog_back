@@ -19,11 +19,6 @@ const startServer = async () => {
     // .catch(error => console.error('Neo4j connection error:', error));
     
     // redisConfig.connectRedis().catch(err => console.error("Redis connection error:", err));
-    cloudinary.config({
-      cloud_name: process.env.CLOUD_NAME,
-      api_key: process.env.API_KEY,
-      api_secret: process.env.API_SECRET,
-    });
       
 
     const server = app.listen(process.env.PORT, () => {
