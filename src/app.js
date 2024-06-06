@@ -6,6 +6,7 @@ const morgan = require('./config/morgan');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
@@ -34,6 +35,8 @@ app.use(cors({
 
 // Serve static files from the 'public' directory
 // v1 api routes
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use('/api/v1', routes);
 app.use('/uploads',express.static( path.join(__dirname, 'uploads')));
 
