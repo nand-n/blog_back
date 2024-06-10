@@ -10,9 +10,4 @@ module.exports.ConversationService = require('./conversation.service')
 module.exports.GoalService = require('./goal.service')
 module.exports.BusinessPlanService = require('./bussinessPlan.setvice')
 module.exports.TaskService = require('./tasks.service')
-
-
-
-
-
-
+module.exports.MindmapService= require('./mindmap.service')
