@@ -10,6 +10,7 @@ module.exports.GoalController = require('./goal.controller')
 module.exports.BusinessPlanController = require('./bussinessPlan.controller')
 module.exports.TasksController = require('./tasks.controller')
 module.exports.ImageUploadController= require('./imageUpload.controller')
+module.exports.MindMapController= require('./mindmap.controller')
 
 
 
