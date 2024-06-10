@@ -12,6 +12,7 @@ const goalRoute = require('./goal.route')
 const bussinessPlanRoute = require('./bussnessPlan.route')
 const tasksRoute= require('./tasks.route')
 const imageUpload = require('./imageUpload.route')
+const mindMapRoute = require('./mindMapRoute.route')
 const router = express.Router();
 
 const defaultRoutes = [
@@ -63,6 +64,11 @@ const defaultRoutes = [
   {
     path:'/upload-image',
     route: imageUpload
+  }
+  ,
+  {
+    path:'/mindmaps',
+    route: mindMapRoute
   }
 ];
 
