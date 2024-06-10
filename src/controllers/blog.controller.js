@@ -18,15 +18,11 @@ const getAllBlogs =  catchAsync(async (req, res) => {
   });
   
   const createBlog = catchAsync(async (req, res) => {
-    try {
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
-
-    const newBlogData = {
-      ...req.body,
-      imageUrl: imageUrl,
-    };
-      const newBlog = await BlogService.createBlog(newBlogData);
-      // redisClient.del('/blogs');
+    try {    
+      let data ={
+        ...req.body , imageUrl:req.body.image
+      }
+      const newBlog = await BlogService.createBlog(data);
       res.status(201).json(newBlog);
     } catch (error) {
       res.status(500).json({ error: error.message });
