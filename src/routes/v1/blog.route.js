@@ -6,7 +6,7 @@ const router = express.Router();
 router
     .route('/')
     .get(BlogController.getAllBlogs)
-    .post(upload.single("image"), BlogController.createBlog );
+    .post(BlogController.createBlog );
 
 router
     .route('/:id')
