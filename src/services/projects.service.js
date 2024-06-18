@@ -2,7 +2,7 @@ const { Project } = require("../models");
 
 const getAllProjects = async () => {
     try {
-      const projects = await Project.find();
+      const projects = await Project.find().sort({ createdDate: -1 });;
       return projects;
     } catch (error) {
       throw new Error(error);
